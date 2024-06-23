@@ -1,0 +1,58 @@
+<html>
+<head>
+  <script>
+    const QUOTEBANK=[
+      {
+        quote:"Knowledge speaks, but wisdom listens...",
+        author:"Jimi Hendrix"
+      },
+      {
+        quote:"I don't stop when I'm tired, I stop when I'm done.",
+        author:"David Goggins"
+      },
+      {
+        quote:"I don't have to show anything to anyone. There is nothing to prove.",
+        author:"Cristiano Ronaldo"
+      }
+
+    ];
+    window.onload=init;
+    function init(){
+      generateQuote()
+    }
+    function generateQuote(){
+      let quoteSize=QUOTEBANK.length;
+      let randomIndex=Math.floor(Math.random()*quoteSize);
+      let randomQuoteData=QUOTEBANK[randomIndex];
+
+      let twitterLink="https://twitter.com/intent/tweet?hashtags=quotes&amp;related=freecodecamp&amp;text=%20"
+      //Add the Quote
+      let quoteInApiFormat=randomQuoteData.quote.replace(/ /g, "%20");
+      twitterLink +=quoteInApiFormat
+      //Add the Author
+      let authorInApiFormat=randomQuoteData.author.replace(/ /g, "%20");
+      twitterLink += " - "+authorInApiFormat
+
+      document.getElementById('tweet-quote').href=twitterLink;
+      document.getElementById('text').innerText= randomQuoteData.quote;
+      document.getElementById('author').innerText= randomQuoteData.author;
+    }
+  </script>
+  <style>
+    *{
+      font-size: 2rem;
+      margin:20px 20px 20px 20px;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <wrapper id='quote-box'>
+    <div id='text'></div>
+    <div id='author'></div>
+    <button id='new-quote' onClick='generateQuote();'>New Quote</button>
+    <a href='#' id='tweet-quote' target='_blank' class='button'>Tweet Quote</a>
+  </wrapper>
+  <script src='https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js'></script>
+</body>
+</html>
